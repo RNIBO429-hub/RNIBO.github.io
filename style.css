@@ -1,0 +1,233 @@
+/* Paleta de Colores Elegante (Modo Oscuro) */
+
+:root {
+    --color-fondo-principal: #18191A;
+    /* Negro profundo */
+    --color-fondo-tarjeta: #242526;
+    /* Gris carbón */
+    --color-texto-claro: #E4E6EB;
+    --color-borde-suave: #3A3B3C;
+    /* Acentos Bolivianos Sutiles */
+    --color-acento-rojo: #C23E33;
+    --color-acento-amarillo: #FDD835;
+    --color-acento-verde: #4CAF50;
+    --color-sombra-fuerte: rgba(0, 0, 0, 0.7);
+}
+
+
+/* ------------------- Estilos Globales ------------------- */
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 0 20px;
+    background-color: var(--color-fondo-principal);
+    color: var(--color-texto-claro);
+    line-height: 1.6;
+}
+
+
+/* ------------------- Encabezado y Títulos ------------------- */
+
+.logo-bandera {
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+.bandera-img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 5px var(--color-acento-amarillo);
+}
+
+h1 {
+    color: var(--color-texto-claro);
+    text-align: center;
+    border-bottom: 2px solid var(--color-acento-rojo);
+    padding-bottom: 10px;
+    /* Ajustado para el logo */
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    font-weight: 700;
+}
+
+h2 {
+    color: var(--color-acento-verde);
+    font-size: 1.4em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--color-borde-suave);
+    font-weight: 500;
+}
+
+
+/* ------------------- Contenedores y Formularios ------------------- */
+
+.input-form,
+.search-form,
+.data-list {
+    background: var(--color-fondo-tarjeta);
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 10px var(--color-sombra-fuerte);
+    margin-bottom: 35px;
+    border: 1px solid var(--color-borde-suave);
+}
+
+
+/* ------------------- Campos de Formulario ------------------- */
+
+input[type="text"],
+input[type="number"],
+textarea {
+    padding: 12px;
+    width: 100%;
+    margin-bottom: 15px;
+    border: 1px solid var(--color-borde-suave);
+    border-radius: 8px;
+    box-sizing: border-box;
+    background-color: #3A3B3C;
+    color: var(--color-texto-claro);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+    border-color: var(--color-acento-amarillo);
+    box-shadow: 0 0 0 2px rgba(253, 216, 53, 0.4);
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+
+/* ------------------- Botones ------------------- */
+
+button {
+    padding: 12px 25px;
+    background-color: var(--color-acento-rojo);
+    color: white;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+button:hover {
+    background-color: #A8332A;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+
+/* ------------------- Lista de Resultados ------------------- */
+
+#items-container {
+    list-style: none;
+    padding: 0;
+}
+
+#items-container li {
+    background: #2e3845;
+    margin-bottom: 12px;
+    padding: 18px;
+    border-left: 5px solid var(--color-acento-amarillo);
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+#items-container strong {
+    color: var(--color-texto-claro);
+    font-weight: 600;
+}
+
+
+/* ------------------- Mensajes de Alerta ------------------- */
+
+#message {
+    margin-top: 15px;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    text-align: center;
+}
+
+#message[style*="green"] {
+    background-color: rgba(76, 175, 80, 0.15);
+    color: var(--color-acento-verde);
+    border: 1px solid var(--color-acento-verde);
+}
+
+#message[style*="red"] {
+    background-color: rgba(194, 62, 51, 0.15);
+    color: var(--color-acento-rojo);
+    border: 1px solid var(--color-acento-rojo);
+}
+
+#message[style*="orange"] {
+    background-color: rgba(255, 159, 0, 0.15);
+    color: #FF9800;
+    border: 1px solid #FF9800;
+}
+
+
+/* ======================================================= */
+
+
+/* ====== DISEÑO RESPONSIVO (MOBILE FIRST) ======== */
+
+
+/* ======================================================= */
+
+@media (max-width: 600px) {
+    body {
+        padding: 0 10px;
+    }
+    h1 {
+        font-size: 1.8em;
+        padding-bottom: 10px;
+        /* Asegurar que la bandera y el texto quepan */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .bandera-img {
+        width: 35px;
+        height: 35px;
+    }
+    .input-form,
+    .search-form,
+    .data-list {
+        padding: 20px 15px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+    }
+    .search-form input[type="text"],
+    .search-form button {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .input-form button,
+    #download-pdf-button {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 10px !important;
+    }
+    #items-container li {
+        padding: 15px;
+        font-size: 0.95em;
+        word-wrap: break-word;
+    }
+}
