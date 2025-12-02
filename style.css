@@ -66,8 +66,8 @@ h2 {
 /* ------------------- Contenedores y Formularios ------------------- */
 
 .input-form,
-.search-form,
-.data-list {
+.data-list,
+.search-form {
     background: var(--color-fondo-tarjeta);
     padding: 30px;
     border-radius: 16px;
@@ -107,7 +107,7 @@ textarea {
 }
 
 
-/* ------------------- Botones ------------------- */
+/* ------------------- Botones Generales ------------------- */
 
 button {
     padding: 12px 25px;
@@ -180,55 +180,6 @@ button:hover {
 }
 
 
-/* ======================================================= */
-
-
-/* ====== DISEÑO RESPONSIVO (MOBILE FIRST) ======== */
-
-
-/* ======================================================= */
-
-@media (max-width: 600px) {
-    body {
-        padding: 0 10px;
-    }
-    h1 {
-        font-size: 1.8em;
-        padding-bottom: 10px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-    .bandera-img {
-        width: 35px;
-        height: 35px;
-    }
-    .input-form,
-    .search-form,
-    .data-list {
-        padding: 20px 15px;
-        border-radius: 12px;
-        margin-bottom: 25px;
-    }
-    .search-form input[type="text"],
-    .search-form button {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-    .input-form button,
-    #download-excel-button {
-        width: 100%;
-        padding: 15px;
-        margin-bottom: 10px !important;
-    }
-    #items-container li {
-        padding: 15px;
-        font-size: 0.95em;
-        word-wrap: break-word;
-    }
-}
-
-
 /* ------------------- Barra de Navegación ------------------- */
 
 .navbar {
@@ -257,4 +208,98 @@ button:hover {
 .navbar a.active {
     background-color: var(--color-acento-rojo);
     color: white;
+}
+
+
+/* ------------------- Paginación (Escritorio) ------------------- */
+
+#pagination-controls button {
+    /* Ajusta el padding de los botones de paginación para diferenciarlos de los principales */
+    padding: 8px 15px;
+    text-transform: none;
+}
+
+#page-status {
+    margin: 0 15px;
+    font-weight: 600;
+}
+
+
+/* ======================================================= */
+
+
+/* ====== DISEÑO RESPONSIVO (MOBILE FIRST) ======== */
+
+
+/* ======================================================= */
+
+@media (max-width: 600px) {
+    body {
+        padding: 0 10px;
+    }
+    h1 {
+        font-size: 1.8em;
+        padding-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .bandera-img {
+        width: 35px;
+        height: 35px;
+    }
+    /* FIX 1: Navbar en Móvil (Se apilan las pestañas) */
+    .navbar {
+        flex-direction: column;
+        padding: 5px 0;
+    }
+    .navbar a {
+        padding: 8px 15px;
+        margin: 3px 10px;
+        font-size: 0.9em;
+    }
+    .input-form,
+    .data-list,
+    .search-form {
+        padding: 20px 15px;
+        border-radius: 12px;
+        margin-bottom: 25px;
+    }
+    /* Todos los botones principales serán de ancho completo en móvil */
+    .input-form button,
+    #download-excel-button,
+    #search-button {
+        width: 100%;
+        padding: 15px;
+        margin-bottom: 10px !important;
+    }
+    /* FIX 2: Paginación en Móvil (Botones pequeños y espaciados) */
+    #pagination-controls {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        margin-top: 15px;
+    }
+    #pagination-controls button {
+        /* Sobreescribe el 100% de ancho y el padding grande de los botones principales */
+        width: auto !important;
+        padding: 8px 10px !important;
+        font-size: 0.8em;
+        text-transform: none !important;
+        flex-grow: 1;
+        /* Ocupan el espacio disponible */
+        margin: 0 5px;
+    }
+    #page-status {
+        flex-shrink: 0;
+        margin: 0 5px;
+        white-space: nowrap;
+        font-size: 0.9em;
+    }
+    #items-container li {
+        padding: 15px;
+        font-size: 0.95em;
+        word-wrap: break-word;
+    }
 }
