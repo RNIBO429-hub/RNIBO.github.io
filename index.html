@@ -4,17 +4,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RNIBO - Registro Nacional de Infieles de Bolivia</title>
+    <title>RNIBO - Registrar Nuevo Caso</title>
     <link rel="stylesheet" href="style.css">
 
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
 </head>
 
 <body>
+    <nav class="navbar">
+        <a href="index.html" class="active">📝 Registrar</a>
+        <a href="search.html">🔍 Buscar y Listar</a>
+    </nav>
+
     <h1>
         <span class="logo-bandera">
             <img src="bandera_bolivia.png" alt="Bandera de Bolivia" class="bandera-img">
@@ -27,26 +31,9 @@
         <input type="text" id="ciudad-input" placeholder="Ciudad" required>
         <input type="number" id="edad-input" placeholder="Edad" min="18" required>
         <textarea id="detalle-input" placeholder="Infidelidad o Detalle del caso..." required></textarea>
+
         <button id="add-button">Guardar Registro</button>
         <p id="message"></p>
-    </div>
-
-    <hr>
-
-    <div class="search-form">
-        <h2>🔍 Buscar Registros</h2>
-        <input type="text" id="search-input" placeholder="Buscar por Nombre o Ciudad">
-        <button id="search-button">Buscar</button>
-    </div>
-
-    <hr>
-
-    <div class="data-list" id="report-content">
-        <h2>📋 Resultados</h2>
-        <button id="download-pdf-button" style="margin-bottom: 20px;">⬇️ Descargar Reporte (PDF)</button>
-        <ul id="items-container">
-            <p>Cargando registros...</p>
-        </ul>
     </div>
 
     <script>

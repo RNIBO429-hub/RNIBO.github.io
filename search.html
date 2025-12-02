@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RNIBO - Buscar y Listar Registros</title>
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <nav class="navbar">
+        <a href="index.html">📝 Registrar</a>
+        <a href="search.html" class="active">🔍 Buscar y Listar</a>
+    </nav>
+
+    <h1>
+        <span class="logo-bandera">
+            <img src="bandera_bolivia.png" alt="Bandera de Bolivia" class="bandera-img">
+        </span> RNIBO - Búsqueda y Resultados
+    </h1>
+
+    <div class="search-form data-list">
+        <h2>🔍 Buscar Registros</h2>
+        <p>✅ **Optimización Activa:** La lista usa paginación (10 resultados por página) para ahorrar lecturas. La búsqueda solo filtra los resultados de la página actual.</p>
+
+        <input type="text" id="search-input" placeholder="Buscar por Nombre, Ciudad o Detalle en la página actual...">
+        <button id="search-button">Filtrar Página</button>
+    </div>
+
+    <hr>
+
+    <div class="data-list" id="report-content">
+        <h2>📋 Resultados</h2>
+        <button id="download-excel-button" style="margin-bottom: 20px;">⬇️ Descargar Reporte Completo (Excel)</button>
+        <ul id="items-container">
+            <p>Cargando registros (Página 1)...</p>
+        </ul>
+
+        <div id="pagination-controls" style="text-align: center; margin-top: 20px;">
+            <button id="prev-page-button" disabled>Página Anterior</button>
+            <span id="page-status">Página 1</span>
+            <button id="next-page-button">Página Siguiente</button>
+        </div>
+
+    </div>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyADyMUzadwkoe46sy3CeYF_dmHGVgTlYZw",
+            authDomain: "rnibo-553b2.firebaseapp.com",
+            projectId: "rnibo-553b2",
+            storageBucket: "rnibo-553b2.firebasestorage.app",
+            messagingSenderId: "338160267032",
+            appId: "1:338160267032:web:d6a8d2eefacc5aca64f86d",
+            measurementId: "G-FK051SXB2V"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+
+    <script src="search.js"></script>
+</body>
+
+</html>
