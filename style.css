@@ -303,3 +303,90 @@ button:hover {
         word-wrap: break-word;
     }
 }
+
+
+/* ... Tus estilos anteriores ... */
+
+
+/* ======================================================= */
+
+
+/* ====== ESTILOS PARA EL MODAL DE BIENVENIDA (ALERTA) ======== */
+
+
+/* ======================================================= */
+
+.modal {
+    display: none;
+    /* Oculto por defecto */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.95);
+    /* Fondo más oscuro */
+    backdrop-filter: blur(8px);
+    /* Más desenfoque */
+}
+
+.modal-content {
+    background-color: var(--color-fondo-tarjeta);
+    margin: 8% auto;
+    /* Ajuste para centrar mejor */
+    padding: 35px;
+    border: 3px solid var(--color-acento-rojo);
+    /* Borde de alerta */
+    width: 90%;
+    max-width: 600px;
+    /* Un poco más ancho para el texto */
+    border-radius: 15px;
+    box-shadow: 0 5px 20px var(--color-sombra-fuerte);
+    text-align: center;
+}
+
+.modal-content h2 {
+    color: var(--color-acento-rojo);
+    border-bottom: 2px solid var(--color-acento-amarillo);
+    /* Subrayado amarillo */
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+    font-size: 1.6em;
+}
+
+.modal-content p {
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+
+/* Estilo específico para el botón de aceptar este mensaje de cierre */
+
+#accept-button {
+    background-color: var(--color-acento-rojo);
+    /* Botón ROJO de cierre */
+    padding: 15px 40px;
+    margin-top: 30px;
+    font-size: 1.1em;
+    text-transform: uppercase;
+}
+
+#accept-button:hover {
+    background-color: #A8332A;
+}
+
+
+/* Media Query para móvil */
+
+@media (max-width: 600px) {
+    .modal-content {
+        margin: 15% 5%;
+        width: 90%;
+        padding: 20px;
+    }
+    .modal-content h2 {
+        font-size: 1.4em;
+    }
+}

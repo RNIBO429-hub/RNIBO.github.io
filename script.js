@@ -1,3 +1,20 @@
+// =================================================================
+// LÓGICA DEL MODAL DE BIENVENIDA
+// =================================================================
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('welcome-modal');
+    const acceptButton = document.getElementById('accept-button');
+
+    // 1. Mostrar el modal inmediatamente al cargar la página
+    modal.style.display = 'block';
+
+    // 2. Ocultar el modal al hacer clic en aceptar
+    acceptButton.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+});
+// =================================================================
+
 // Obtiene la instancia de Firestore
 const db = firebase.firestore();
 
@@ -10,12 +27,29 @@ const addButton = document.getElementById('add-button');
 const messageElement = document.getElementById('message');
 
 // =================================================================
-// 1. FUNCIÓN PARA GUARDAR DATOS (SOLO EN INDEX.HTML)
+// Función auxiliar para normalizar el texto (Capitalización y limpieza)
+// =================================================================
+function normalizeText(text) {
+    if (!text) return '';
+    // 1. Limpiar espacios extra
+    text = text.trim();
+
+    // 2. Capitalizar la primera letra de cada palabra (ideal para nombres y ciudades)
+    return text.toLowerCase().split(' ').map(word => {
+        if (word.length === 0) return '';
+        return word.charAt(0).toUpperCase() + word.slice(1);
+    }).join(' ');
+}
+
+
+// =================================================================
+// 3. FUNCIÓN PARA GUARDAR DATOS
 // =================================================================
 
 addButton.addEventListener('click', async() => {
-    const nombre = nombreInput.value.trim();
-    const ciudad = ciudadInput.value.trim();
+    // Aplicamos limpieza y normalización a los valores antes de usarlos
+    const nombre = normalizeText(nombreInput.value);
+    const ciudad = normalizeText(ciudadInput.value);
     const edad = parseInt(edadInput.value);
     const detalle = detalleInput.value.trim();
 

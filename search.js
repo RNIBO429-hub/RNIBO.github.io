@@ -13,12 +13,11 @@ const downloadExcelButton = document.getElementById('download-excel-button');
 const PAGE_SIZE = 10;
 let currentPage = 1;
 let lastVisible = null;
-// pageHistory[0] es siempre null (inicio), pageHistory[1] es el doc de la página 1, etc.
 const pageHistory = [null];
 const prevPageButton = document.getElementById('prev-page-button');
 const nextPageButton = document.getElementById('next-page-button');
 const pageStatus = document.getElementById('page-status');
-let activeSearchTerm = ''; // Para mantener el término de búsqueda al cambiar de página
+let activeSearchTerm = '';
 
 
 // =================================================================
@@ -26,10 +25,8 @@ let activeSearchTerm = ''; // Para mantener el término de búsqueda al cambiar 
 // =================================================================
 
 searchButton.addEventListener('click', () => {
-    // Solo actualiza el término de búsqueda, no reinicia la paginación.
-    // La búsqueda se aplica a la página que ya está cargada.
     activeSearchTerm = searchInput.value.trim().toLowerCase();
-    loadRecords(false); // Carga la página actual con el nuevo filtro
+    loadRecords(false);
 });
 
 function loadRecords(resetSearch = true) {
@@ -39,8 +36,6 @@ function loadRecords(resetSearch = true) {
     prevPageButton.disabled = true;
     nextPageButton.disabled = true;
 
-    // Si es la primera carga o si se está navegando, el término de búsqueda activo se borra, 
-    // y solo se usa si se presiona el botón "Filtrar Página".
     if (resetSearch) {
         activeSearchTerm = '';
         searchInput.value = '';
@@ -48,14 +43,12 @@ function loadRecords(resetSearch = true) {
 
     let query = db.collection('registrosRNIBO').orderBy('timestamp', 'desc');
 
-    // Usar el documento guardado en el historial para iniciar la página actual
     const startAfterDoc = pageHistory[currentPage - 1];
 
     if (startAfterDoc) {
         query = query.startAfter(startAfterDoc);
     }
 
-    // Aplicar el límite de lecturas (OPTIMIZACIÓN CLAVE)
     query = query.limit(PAGE_SIZE);
 
     query.get().then((snapshot) => {
@@ -72,12 +65,10 @@ function loadRecords(resetSearch = true) {
             }
 
         } else {
-            // Mostrar los resultados
             snapshot.forEach((doc, index) => {
                 const data = doc.data();
                 const recordText = `${data.nombre} ${data.ciudad} ${data.detalle}`.toLowerCase();
 
-                // Aplicar el filtro: solo muestra el ítem si NO hay término de búsqueda O si coincide
                 if (!term || recordText.includes(term)) {
 
                     const listItem = document.createElement('li');
@@ -90,23 +81,18 @@ function loadRecords(resetSearch = true) {
                     foundOnPage = true;
                 }
 
-                // Almacenar el último documento visible para la paginación 'siguiente'
                 if (index === snapshot.docs.length - 1) {
                     lastVisible = doc;
                 }
             });
 
-            // Si se usó un filtro y no se encontró nada en el cliente
             if (term && !foundOnPage) {
                 itemsContainer.innerHTML = `<li>No se encontró ningún registro que coincida con "${term}" en esta página. Use los botones de página para buscar en otras páginas.</li>`;
             }
 
             // 🌟 Lógica de Paginación 🌟
             prevPageButton.disabled = (currentPage === 1);
-
-            // Habilitar 'Siguiente' SOLO si obtuvimos el número MÁXIMO de elementos (10)
             nextPageButton.disabled = snapshot.docs.length < PAGE_SIZE;
-
             pageStatus.textContent = `Página ${currentPage}`;
         }
     }).catch(error => {
@@ -124,7 +110,7 @@ nextPageButton.addEventListener('click', () => {
     if (lastVisible) {
         pageHistory.push(lastVisible);
         currentPage++;
-        loadRecords(true); // Reinicia el filtro de búsqueda al cambiar de página
+        loadRecords(true);
     }
 });
 
@@ -132,18 +118,18 @@ prevPageButton.addEventListener('click', () => {
     if (currentPage > 1) {
         pageHistory.pop();
         currentPage--;
-        loadRecords(true); // Reinicia el filtro de búsqueda al cambiar de página
+        loadRecords(true);
     }
 });
 
 
 // =================================================================
-// 2. FUNCIÓN PARA DESCARGAR EXCEL (.xlsx)
+// 2. FUNCIÓN PARA DESCARGAR EXCEL (.xlsx) - ORDENADO POR NOMBRE (SIMPLE)
 // =================================================================
-// NOTA: Esta acción SIEMPRE consume TODAS las lecturas.
 
 downloadExcelButton.addEventListener('click', () => {
-    db.collection('registrosRNIBO').orderBy('timestamp', 'asc').get()
+    // Mantenemos la ordenación por nombre (ascendente) para un reporte útil
+    db.collection('registrosRNIBO').orderBy('nombre', 'asc').get()
         .then((snapshot) => {
             const dataForExcel = [];
 
@@ -160,6 +146,7 @@ downloadExcelButton.addEventListener('click', () => {
 
                 let dateRegistered = 'N/A';
                 if (data.timestamp && data.timestamp.toDate) {
+                    // Formato de fecha simple
                     dateRegistered = data.timestamp.toDate().toLocaleString('es-BO');
                 }
 
@@ -173,6 +160,7 @@ downloadExcelButton.addEventListener('click', () => {
             });
 
             const ws = XLSX.utils.aoa_to_sheet(dataForExcel);
+
             const wb = XLSX.utils.book_new();
             XLSX.utils.book_append_sheet(wb, ws, "RegistrosRNIBO");
             XLSX.writeFile(wb, `RNIBO_Reporte_${new Date().toISOString().slice(0, 10)}.xlsx`);
@@ -186,5 +174,5 @@ downloadExcelButton.addEventListener('click', () => {
 
 // Inicializa la carga de la primera página al abrir la pestaña
 document.addEventListener('DOMContentLoaded', () => {
-    loadRecords(true); // Carga inicial con reinicio de filtro
+    loadRecords(true);
 });
