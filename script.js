@@ -1,5 +1,5 @@
 // =================================================================
-// LÓGICA DEL MODAL DE BIENVENIDA
+// LÓGICA DEL MODAL DE BIENVENIDA Y REDIRECCIÓN
 // =================================================================
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('welcome-modal');
@@ -8,9 +8,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // 1. Mostrar el modal inmediatamente al cargar la página
     modal.style.display = 'block';
 
-    // 2. Ocultar el modal al hacer clic en aceptar
+    // 2. Ocultar el modal AL HACER CLIC Y REDIRIGIR
     acceptButton.addEventListener('click', () => {
-        modal.style.display = 'none';
+        // Redirige al usuario fuera de la aplicación.
+        // **IMPORTANTE: CAMBIA LA URL DE REDIRECCIÓN AQUÍ**
+        window.location.href = "https://www.google.com";
     });
 });
 // =================================================================
