@@ -4,78 +4,144 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RNIBO - Registrar Nuevo Caso</title>
-    <link rel="stylesheet" href="style.css">
-
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
-
-    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <title>XYOUHUB</title>
+    <style>
+         :root {
+            --blue-tg: #0088cc;
+            --bg: #0b0b0b;
+            --card: #161616;
+        }
+        
+        body {
+            background-color: var(--bg);
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+        }
+        
+        header {
+            padding: 25px;
+            text-align: center;
+            width: 100%;
+            background: #000;
+            border-bottom: 2px solid var(--blue-tg);
+        }
+        
+        h1 {
+            color: var(--blue-tg);
+            letter-spacing: 5px;
+            margin: 0;
+        }
+        /* ESPACIOS DE PUBLICIDAD */
+        
+        .ad-top {
+            width: 100%;
+            max-width: 728px;
+            margin: 20px auto;
+            min-height: 90px;
+            background: #111;
+            border: 1px solid #222;
+        }
+        
+        .ad-mid {
+            width: 100%;
+            max-width: 300px;
+            height: 250px;
+            background: #111;
+            margin: 20px auto;
+            border: 1px solid #222;
+        }
+        
+        .container {
+            width: 95%;
+            max-width: 750px;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+            padding-bottom: 50px;
+        }
+        
+        .video-card {
+            background: var(--card);
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+        }
+        
+        .video-header {
+            padding: 12px 15px;
+            background: #222;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        /* TU CONFIGURACIÓN DE VENTANA */
+        
+        .window {
+            position: relative;
+            width: 100%;
+            height: 550px;
+            overflow: hidden;
+            background: #000;
+        }
+        
+        .window iframe,
+        .window script,
+        .window tg-post {
+            position: absolute;
+            top: -50px;
+            left: 0;
+            width: 100%;
+            height: 600px;
+        }
+        
+        footer {
+            padding: 40px;
+            color: #444;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
 
-    <div id="welcome-modal" class="modal">
-        <div class="modal-content">
-            <h2 style="color: var(--color-acento-rojo);">🔴 AVISO DE CIERRE TEMPORAL Y BRECHA DE SEGURIDAD 🔴</h2>
+    <header>
+        <h1>XYOUHUB</h1>
+    </header>
 
-            <p style="font-size: 1.1em; font-weight: bold; color: var(--color-acento-amarillo);">
-                Estimados Usuarios de RNIBO:
-            </p>
+    <div class="ad-top">
+        <p style="color:#333; text-align:center; font-size:10px; padding-top:35px;">ADVERTISEMENT</p>
+    </div>
 
-            <p>Lamentamos informarles que se ha sufrido un **ataque informático grave** que comprometió los datos y registros del sistema actual.</p>
+    <div class="container">
 
-            <div style="background-color: #331f20; padding: 15px; border-left: 5px solid var(--color-acento-rojo); margin: 20px 0; text-align: left;">
-                <p><strong>Origen del Ataque:</strong> Desconocemos el paradero del atacante, pero se ha confirmado que el origen del compromiso fue en la ciudad de **La Paz**.</p>
-                <p><strong>Datos Comprometidos:</strong> Se estima que más de **20,000 registros** ingresados han sido afectados.</p>
+        <div class="video-card">
+            <div class="video-header">CONTENIDO EXCLUSIVO #1</div>
+            <div class="window">
+                <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="store1825/2" data-width="100%"></script>
             </div>
-
-            <p><strong>Solicitud a la Comunidad:</strong></p>
-
-            <p style="font-weight: 600;">Rogamos a todos los usuarios que hayan solicitado copias de la base de datos (Excel) en el pasado, que las proporcionen a **Maddy Chávez (TikTok)** para poder enriquecer el respaldo realizado por ella.</p>
-
-            <p style="font-style: italic; margin-top: 25px;">El equipo de RNIBO cierra temporalmente para investigar exhaustivamente el origen de este ataque y aplicar medidas robustas para evitarlo a futuro. No es un adiós, sino un hasta luego. Próximamente, nuevas y más seguras actualizaciones en
-                **2026**.</p>
-
-            <button id="accept-button">He Leído y Acepto el Cierre</button>
         </div>
-    </div>
-    <nav class="navbar">
-        <a href="index.html" class="active">📝 Registrar</a>
-        <a href="search.html">🔍 Buscar y Listar</a>
-    </nav>
 
-    <h1>
-        <span class="logo-bandera">
-            <img src="bandera_bolivia.png" alt="Bandera de Bolivia" class="bandera-img">
-        </span> RNIBO - Registro Nacional de Infieles de Bolivia
-    </h1>
+        <div class="ad-mid">
+            <p style="color:#333; text-align:center; font-size:10px; padding-top:110px;">ADVERTISEMENT</p>
+        </div>
 
-    <div class="input-form">
-        <h2>📝 Agregar Nuevo Registro</h2>
-        <input type="text" id="nombre-input" placeholder="Nombre completo" required>
-        <input type="text" id="ciudad-input" placeholder="Ciudad" required>
-        <input type="number" id="edad-input" placeholder="Edad" min="18" required>
-        <textarea id="detalle-input" placeholder="Infidelidad o Detalle del caso..." required></textarea>
+        <div class="video-card">
+            <div class="video-header">CONTENIDO EXCLUSIVO #2</div>
+            <div class="window">
+                <script async src="https://telegram.org/js/telegram-widget.js?22" data-telegram-post="store1825/3" data-width="100%"></script>
+            </div>
+        </div>
 
-        <button id="add-button">Guardar Registro</button>
-        <p id="message"></p>
     </div>
 
-    <script>
-        const firebaseConfig = {
-            apiKey: "AIzaSyADyMUzadwkoe46sy3CeYF_dmHGVgTlYZw",
-            authDomain: "rnibo-553b2.firebaseapp.com",
-            projectId: "rnibo-553b2",
-            storageBucket: "rnibo-553b2.firebasestorage.app",
-            messagingSenderId: "338160267032",
-            appId: "1:338160267032:web:d6a8d2eefacc5aca64f86d",
-            measurementId: "G-FK051SXB2V"
-        };
-        firebase.initializeApp(firebaseConfig);
-    </script>
+    <footer>
+        &copy; 2026 XYOUHUB
+    </footer>
 
-    <script src="script.js"></script>
 </body>
 
 </html>
